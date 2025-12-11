@@ -1,2 +1,8 @@
-flask
-redis
+fastapi
+uvicorn[standard]
+mediapipe
+opencv-python
+numpy
+tensorflow
+pydantic
+python-multipart
