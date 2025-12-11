@@ -29,7 +29,8 @@ app.add_middleware(
 mp_holistic = mp.solutions.holistic
 
 ACTIONS = ["happy", "sad", "angry"]
-MODEL_PATH = "./backend/model.h5"
+# MODEL_PATH = "./backend/model.h5"
+MODEL_PATH = "./backend/model_mlp.h5"
 model = tf.keras.models.load_model(MODEL_PATH)
 
 # return 1D vector array of keypoints
@@ -63,41 +64,82 @@ class PredictionResponse(BaseModel):
 def emotion_check():
     return {"status": "ok"}
 
-@app.post("/predict", response_model=PredictionResponse)
-# wait for file upload in form-data under key "file"
-async def predict(file: UploadFile = File(...)):
-    contents = await file.read()
+# @app.post("/predict", response_model=PredictionResponse)
+# # wait for file upload in form-data under key "file"
+# async def predict(file: UploadFile = File(...)):
+#     contents = await file.read()
 
-    # convert img bytes to keypoints
-    keypoints = image_to_keypoints(contents)
+#     # convert img bytes to keypoints
+#     keypoints = image_to_keypoints(contents)
 
-    # FOR LSTM MODEL
-    # prep input for LSTM model
-    # seq = np.repeat([keypoints.astype(np.float32)], 30, axis=0)  # (30, 1662)
-    # add dim so shape = (1, 30, 1662) as LSTM exptects 3D input
-    # x = np.expand_dims(seq, axis=0)
+#     # FOR LSTM MODEL
+#     # prep input for LSTM model
+#     # seq = np.repeat([keypoints.astype(np.float32)], 30, axis=0)  # (30, 1662)
+#     # add dim so shape = (1, 30, 1662) as LSTM exptects 3D input
+#     # x = np.expand_dims(seq, axis=0)
 
-    # FOR MLP MODEL
-    # add dim so shape = (1, 1662) as MLP expects 2D input
-    x = np.expand_dims(keypoints.astype(np.float32), axis=0)
+#     # FOR MLP MODEL
+#     # add dim so shape = (1, 1662) as MLP expects 2D input
+#     x = np.expand_dims(keypoints.astype(np.float32), axis=0)
     
-    # make prediction using loaded model
-    preds = model.predict(x)[0]
+#     # make prediction using loaded model
+#     preds = model.predict(x)[0]
 
-    # find highest prob idx and map to lbl
+#     # find highest prob idx and map to lbl
+#     predicted_idx = int(np.argmax(preds))
+#     emotion = ACTIONS[predicted_idx]
+
+#     # build dict of label: probability pairs for JSON response
+#     prob_dict = {
+#         label: float(p) for label, p in zip(ACTIONS, preds)
+#     }
+
+#     # return response as Pydantic model (emotion lbl + prob dict)
+#     return PredictionResponse(
+#         emotion=emotion,
+#         probabilities=prob_dict,
+#     )
+
+@app.post("/predict", response_model=PredictionResponse)
+async def predict(file: UploadFile = File(...)):
+    print("---- REQUEST RECEIVED ----")
+
+    try:
+        contents = await file.read()
+        print("Bytes length:", len(contents))
+    except Exception as e:
+        print("ERROR reading file:", e)
+        raise
+
+    try:
+        keypoints = image_to_keypoints(contents)
+        print("Keypoints shape:", keypoints.shape)
+    except Exception as e:
+        print("ERROR in MediaPipe:", e)
+        raise
+
+    try:
+        x = np.expand_dims(keypoints.astype(np.float32), axis=0)
+        print("Model input shape:", x.shape)
+    except Exception as e:
+        print("ERROR preparing input:", e)
+        raise
+
+    try:
+        preds = model.predict(x)
+        print("Preds:", preds)
+        preds = preds[0]
+    except Exception as e:
+        print("ERROR during prediction:", e)
+        raise
+
     predicted_idx = int(np.argmax(preds))
     emotion = ACTIONS[predicted_idx]
 
-    # build dict of label: probability pairs for JSON response
-    prob_dict = {
-        label: float(p) for label, p in zip(ACTIONS, preds)
-    }
+    prob_dict = {label: float(p) for label, p in zip(ACTIONS, preds)}
 
-    # return response as Pydantic model (emotion lbl + prob dict)
-    return PredictionResponse(
-        emotion=emotion,
-        probabilities=prob_dict,
-    )
+    return PredictionResponse(emotion=emotion, probabilities=prob_dict)
+
 
 if __name__ == "__main__":
     # module app, variable app
