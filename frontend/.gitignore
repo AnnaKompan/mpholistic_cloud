@@ -1,0 +1,32 @@
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Virtual environments
+venv/
+.env/
+.env
+.venv/
+
+# Models
+# *.h5
+*.hdf5
+*.tflite
+*.pth
+*.pt
+
+# Byte-compiled
+*.pyc
+
+# Node / React
+frontend/node_modules/
+frontend/build/
+frontend/.env
+
+# Logs
+*.log
+
+# Docker
+*.pid

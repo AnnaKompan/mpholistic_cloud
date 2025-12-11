@@ -1,0 +1,40 @@
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Virtual environments
+venv/
+.env/
+.env
+.venv/
+
+# TensorFlow logs
+*.tfevents.*
+
+# Training data
+backend/mp_data/
+*.npy
+
+
+# Models
+# *.h5
+*.hdf5
+*.tflite
+*.pth
+*.pt
+
+# Byte-compiled
+*.pyc
+
+# Node / React
+frontend/node_modules/
+frontend/build/
+frontend/.env
+
+# Logs
+*.log
+
+# Docker
+*.pid
