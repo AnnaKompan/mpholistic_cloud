@@ -30,7 +30,7 @@ mp_holistic = mp.solutions.holistic
 
 ACTIONS = ["happy", "sad", "angry"]
 # MODEL_PATH = "./backend/model.h5"
-MODEL_PATH = "./backend/model_mlp.h5"
+MODEL_PATH = "./model_mlp.h5"
 model = tf.keras.models.load_model(MODEL_PATH)
 
 # return 1D vector array of keypoints
