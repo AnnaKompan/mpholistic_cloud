@@ -1,6 +1,7 @@
 import logo from './logo.svg';
 import React, {useState} from 'react';
 import './App.css';
+import './index.css'
 
 function APP(){
   // set selected file, useState null initial(no file selected)
@@ -83,7 +84,7 @@ function APP(){
   // JSX (UI)
   return (
     <div className='App'>
-      <h1>Emotion Recognition</h1>
+      <h1 className="header">Emotion Recognition</h1>
       <form onSubmit={handleSubmit}>
         <input
           type="file"
