@@ -85,20 +85,20 @@ function APP(){
   return (
     <div className='App'>
       <h1 className="header">Emotion Recognition</h1>
-      <form onSubmit={handleSubmit}>
-        <input
+      <form className="form" onSubmit={handleSubmit}>
+        <input className="file-input"
           type="file"
           accept="image/*"
           onChange={handleFileChange}
         />
-        <button type="submit" disabled={isLoading}>
+        <button className="submit-btn" type="submit" disabled={isLoading}>
           {isLoading ? "Predicting, please wait..." : "Predict Emotion"}
         </button>
       </form>
       {/* Preview selected image */}
       {previewUrl && (
         <div>
-          <h2>Selected Image</h2>
+          <h2 className="sub-header">Selected Image</h2>
           <img
             src={previewUrl}
             alt="preview"
@@ -108,23 +108,23 @@ function APP(){
       )}
       {/* Display error message */}
       {error && (
-        <p style={{color: "red"}}>
+        <p className="error-msg">
           {error}
         </p>
       )}
 
       {/* Display prediction results */}
       {emotion && (
-        <div style={{marginTop: "20px"}}>
-          <h2>Prediction</h2>
-          <p>
+        <div className="prediction-results">
+          <h2 className="sub-header">Prediction</h2>
+          <p className="emotion-text">
             Emotion: <strong>{emotion}</strong>
           </p>
           {/* Show probabilities for each emotion */}
           {probabilities && (
-            <ul>
+            <ul className="probability-list">
               {Object.entries(probabilities).map(([label, prob]) => (
-                <li key={label}>
+                <li className="probability-item" key={label}>
                   {label}: {(prob * 100).toFixed(1)}%
                 </li>
               ))}

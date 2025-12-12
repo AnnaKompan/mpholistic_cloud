@@ -63,7 +63,7 @@ README.md
 
 3. Run server for backend
 
-`uvicorn app:app --reload --host 0.0.0.0. --port 8000`
+`uvicorn app:app --reload --host 0.0.0.0 --port 8000`
 
 4. Backend runs at:
 

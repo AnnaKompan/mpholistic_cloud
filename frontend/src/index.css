@@ -1,4 +1,5 @@
 body {
+  background-color: #4e4e4e45;
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
@@ -12,6 +13,84 @@ code {
     monospace;
 }
 
+.App{
+  text-align: center;
+  margin: 0 auto;
+  padding: 20px;
+}
+
 .header{
-  color:red;
+  color:green;
+}
+
+.sub-header{
+  color: #4CAF50;
+}
+
+.submit-btn{
+  background-color: #4CAF50;
+  border: none;
+  color: white;
+  padding: 10px 24px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 12px;
+}
+
+.file-input::file-selector-button {
+  background-color: #4CAF50;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  margin-right: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  :hover {
+    background-color: #45a049;
+  }
+}
+
+.file-input::file-selector-button:hover {
+  background-color: #45a049;
+}
+
+.submit-btn:hover {
+  background-color: #45a049;
+}
+
+
+
+.form{
+  margin-top:20px;
+  margin-bottom:20px;
+}
+
+.error-msg{
+  font-weight: bold;
+  color: red;
+}
+
+.prediction-results{
+  font-size: 18px;
+  margin-top: 20px;
+}
+
+.emotion-text{
+  color: #333;
+}
+
+.probability-list{
+  list-style-type: none;
+  padding: 0;
+}
+
+.probability-item{
+  background-color: #f2f2f2;
+  margin: 5px 0;
+  padding: 8px;
+  border-radius: 8px;
 }
