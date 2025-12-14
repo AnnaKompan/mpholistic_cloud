@@ -13,82 +13,125 @@ code {
     monospace;
 }
 
-.App{
+.App {
   text-align: center;
   margin: 0 auto;
   padding: 20px;
 }
 
-.header{
-  color:green;
+.header {
+  color: green;
 }
 
-.sub-header{
+.sub-header {
   color: #4CAF50;
 }
 
-.submit-btn{
-  background-color: #4CAF50;
+.submit-btn,
+.camera-btn,
+.file-input::file-selector-button {
+  background: linear-gradient(135deg, #42e695 0%, #3bb2b8 100%);
   border: none;
   color: white;
-  padding: 10px 24px;
+  padding: 12px 24px;
   text-align: center;
   text-decoration: none;
   display: inline-block;
   font-size: 16px;
-  margin: 4px 2px;
+  font-weight: 600;
+  margin: 10px;
   cursor: pointer;
-  border-radius: 12px;
+  border-radius: 25px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  letter-spacing: 0.5px;
 }
 
-.file-input::file-selector-button {
-  background-color: #4CAF50;
+.submit-btn:hover,
+.camera-btn:hover,
+.file-input::file-selector-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 7px 14px rgba(0, 0, 0, 0.2);
+  background: linear-gradient(135deg, #3bb2b8 0%, #42e695 100%);
+}
+
+.submit-btn:active,
+.camera-btn:active,
+.file-input::file-selector-button:active {
+  transform: translateY(1px);
+  box-shadow: 0 3px 5px rgba(0, 0, 0, 0.1);
+}
+
+.submit-btn:disabled {
+  background: #ccc;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+.camera-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 20px 0;
+  background: #fff;
+  padding: 20px;
+  border-radius: 15px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+.camera-controls {
+  margin-top: 15px;
+  display: flex;
+  gap: 10px;
+}
+
+.camera-controls button {
+  background: linear-gradient(135deg, #ff6b6b 0%, #ee5253 100%);
+  border: none;
   color: white;
   padding: 10px 20px;
-  border: none;
-  margin-right: 10px;
-  border-radius: 5px;
+  border-radius: 20px;
   cursor: pointer;
-  :hover {
-    background-color: #45a049;
-  }
+  font-weight: bold;
+  transition: transform 0.2s;
 }
 
-.file-input::file-selector-button:hover {
-  background-color: #45a049;
+.camera-controls button:first-child {
+  background: linear-gradient(135deg, #1dd1a1 0%, #10ac84 100%);
 }
 
-.submit-btn:hover {
-  background-color: #45a049;
+.camera-controls button:hover {
+  transform: scale(1.05);
 }
 
 
 
-.form{
-  margin-top:20px;
-  margin-bottom:20px;
+.form {
+  margin-top: 20px;
+  margin-bottom: 20px;
 }
 
-.error-msg{
+.error-msg {
   font-weight: bold;
   color: red;
 }
 
-.prediction-results{
+.prediction-results {
   font-size: 18px;
   margin-top: 20px;
 }
 
-.emotion-text{
+.emotion-text {
   color: #333;
 }
 
-.probability-list{
+.probability-list {
   list-style-type: none;
   padding: 0;
 }
 
-.probability-item{
+.probability-item {
   background-color: #f2f2f2;
   margin: 5px 0;
   padding: 8px;
