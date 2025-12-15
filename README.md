@@ -100,3 +100,36 @@ Frontend: http://localhost:3000
 Backend: http://localhost:8000 
 
 This simulates a cloud microservice system
+
+## Google Cloud Deployment on Cloud Run
+
+### 1. Backend Deployment
+
+1.  **Install Google Cloud CLI**: [Instructions](https://cloud.google.com/sdk/docs/install)
+2.  **Authenticate**: `gcloud auth login`
+3.  **Deploy Backend**:
+    Run this command in the `backend/` directory:
+    ```bash
+    gcloud run deploy emotion-backend \
+      --source . \
+      --platform managed \
+      --region asia-east1 \
+      --allow-unauthenticated \
+      --port 8000 \
+      --memory 1Gi \
+      --cpu 1
+    ```
+4.  **Copy URL**: Note the `Service URL` output (e.g., `https://emotion-backend-xyz.a.run.app`).
+
+### 2. Frontend Connection
+
+1.  Open `frontend/src/App.js`.
+2.  Replace:
+    ```javascript
+    fetch("http://localhost:8000/predict", ...)
+    ```
+    With:
+    ```javascript
+    fetch("https://YOUR-BACKEND-URL.a.run.app/predict", ...)
+    ```
+3.  Run `npm start` (local frontend will talk to cloud backend) or deploy the frontend.
