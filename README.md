@@ -5,7 +5,7 @@
 1. Using MP Holistic collected dataset with 3 emotions: happy, sad, angry (90 images in total)
 
 2. Trained MLP (Multi-Layer Perceptron) - 97% accuracy
-[!model_summary](./frontend/public/images/model_summary.png)
+![model_summary](./frontend/public/images/model_summary.png)
 
 3. Runs as two microservices (frontend + backend) and fully containerized using Docker Compose
 
